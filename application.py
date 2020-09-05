@@ -21,5 +21,5 @@ def extractcredential():
             UserName = ent.text
         if ent.label_ == "PASSWORD":
             Password = ent.text
-        response = r'{"Credential":"' + CredentialName + '","Username":"' + UserName + '","Password":"' + Password + '"}'
+    response = r'{"Credential":"' + CredentialName + '","Username":"' + UserName + '","Password":"' + Password + '"}'
     return(response)
