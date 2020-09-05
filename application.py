@@ -9,8 +9,17 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @cross_origin()
 def extractcredential():
     nlp2 = spacy.load("custom_ner_model_credential")
-    doc2 = nlp2("Please update the username for the credential XD_FAST_056. The new username is XD_USERNAME and the password is XD$qa123")
+    CredentialName = ""
+    UserName = ""
+    Password = ""
+    doc2 = nlp2(request.form.get('mailbody'))
     response = "{"
     for ent in doc2.ents:
-        response = response + " " + ent.label_ + " " + "," + " " + ent.text + " "
+        if ent.label_ == "CREDENTIAL":
+            CredentialName = ent.text
+        if ent.label_ == "USER":
+            UserName = ent.text
+        if ent.label_ == "PASSWORD":
+            Password = ent.text
+        response = r'{"Credential":"' + CredentialName + '","Username":"' + UserName + '","Password":"' + Password + '"}'
     return(response)
