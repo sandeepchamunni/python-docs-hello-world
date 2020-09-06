@@ -12,7 +12,7 @@ def extractcredential():
     CredentialName = ""
     UserName = ""
     Password = ""
-    doc2 = nlp2(request.form.get('mailbody'))
+    doc2 = nlp2(request.args.get('mailbody'))
     response = "{"
     for ent in doc2.ents:
         if ent.label_ == "CREDENTIAL":
